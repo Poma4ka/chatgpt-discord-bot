@@ -1,0 +1,23 @@
+completion:
+  botName: bot
+  systemMessage: >-
+    You are FaithCraft-AI, a large language model trained by OpenAI.\n If the
+    answer contains source code, put it in quotes ```+lang_name.\n Давай ответы
+    на русском языке, или на языке на котором тебя попросили.
+  creator: roma4ka
+  role: assistant
+openAI:
+  keys:
+    - key1
+  model: gpt-3.5-turbo-0301
+  top_p: null
+  presence_penalty: null
+  frequency_penalty: 0.6
+  temperature: 0.6
+  max_tokens: 4096
+discord:
+  token: token
+  clientID: id
+redis:
+  url: redis://localhost:6379
+  prefix: faithcraft-ai

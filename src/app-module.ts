@@ -23,7 +23,7 @@ export class AppModule {
         await this.configModule.init();
         await this.openAIModule.init();
         await this.discordModule.init();
-        await this.cacheModule.init();
+        // await this.cacheModule.init();
 
         this.runtimeController = new RuntimeController(this);
     }

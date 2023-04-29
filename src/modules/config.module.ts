@@ -28,7 +28,7 @@ export interface Config {
 }
 
 export default class {
-    private CONFIG_PATH: string = path.resolve('', 'config.yml');
+    private CONFIG_PATH: string = path.resolve('', 'config', 'config.yml');
 
     private config: Config;
 

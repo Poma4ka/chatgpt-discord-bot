@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  chat-gpt-discord-bot:
+    build: .
+    volumes:
+      - /home/chat-gpt-discord-bot:/app/config
+    restart: always

@@ -21,14 +21,11 @@ export interface Config {
         botName: string;
         systemMessage: string;
     };
-    redis: {
-        url: string;
-        prefix?: string;
-    };
 }
 
 export default class {
-    private CONFIG_PATH: string = path.resolve('', 'config', 'config.yml');
+    private CONFIG_PATH: string = path.resolve('', 'config');
+    private CONFIG_NAME: string = 'config.yml';
 
     private config: Config;
 
@@ -46,18 +43,26 @@ export default class {
     }
 
     public async updateConfig(change: (config: Config) => any) {
+        await fs.mkdir(this.CONFIG_PATH, { recursive: true }).catch(() => null);
+
         change(this.config);
 
         const newBuffer = Buffer.from(yaml.dump(this.config));
 
-        await fs.writeFile(this.CONFIG_PATH, newBuffer);
+        await fs.writeFile(
+            path.resolve(this.CONFIG_PATH, this.CONFIG_NAME),
+            newBuffer,
+        );
     }
 
     private async readConfig() {
         return await fs
-            .access(this.CONFIG_PATH)
+            .access(path.resolve(this.CONFIG_PATH, this.CONFIG_NAME))
             .then(async () => {
-                const buffer = await fs.readFile(this.CONFIG_PATH, 'utf8');
+                const buffer = await fs.readFile(
+                    path.resolve(this.CONFIG_PATH, this.CONFIG_NAME),
+                    'utf8',
+                );
 
                 try {
                     return yaml.load(buffer.toString());
@@ -69,7 +74,13 @@ export default class {
                 const config = this.getDefaultConfig();
                 const configBuffer = Buffer.from(yaml.dump(config));
 
-                await fs.writeFile(this.CONFIG_PATH, configBuffer);
+                await fs
+                    .mkdir(this.CONFIG_PATH, { recursive: true })
+                    .catch(() => null);
+                await fs.writeFile(
+                    path.resolve(this.CONFIG_PATH, this.CONFIG_NAME),
+                    configBuffer,
+                );
 
                 return config;
             });
@@ -90,10 +101,6 @@ export default class {
             discord: {
                 ...defaultConfig.discord,
                 ...config?.discord,
-            },
-            redis: {
-                ...defaultConfig.redis,
-                ...config?.redis,
             },
         };
     }
@@ -116,10 +123,6 @@ export default class {
             completion: {
                 botName: 'bot',
                 systemMessage: 'You are Chat-GPT.',
-            },
-            redis: {
-                url: 'redis://localhost:6380',
-                prefix: '',
             },
         };
     }

@@ -75,8 +75,9 @@ export default class {
         const reply = await this.appModule.openAIModule.createChatCompletion(
             history,
             {
-                content: `${username}: ${cleanMessage}`,
+                content: cleanMessage,
                 role: 'user',
+                name: username,
             },
             {
                 signal: abortController.signal,
@@ -158,10 +159,8 @@ export default class {
                         message.author.id === this.config.discord.clientID
                             ? 'assistant'
                             : 'user',
-                    content:
-                        message.author.id === this.config.discord.clientID
-                            ? cleanMessage
-                            : `${username}: ${cleanMessage}`,
+                    content: cleanMessage,
+                    name: username,
                 });
 
                 maxMessagesLength -= cleanMessage.length;

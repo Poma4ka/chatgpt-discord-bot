@@ -17,7 +17,8 @@ export default class {
     private openAI: OpenAIApi;
     private config: Config;
 
-    constructor(private appModule: AppModule) {}
+    constructor(private appModule: AppModule) {
+    }
 
     public async init(key?: string) {
         this.config = this.appModule.configModule.getConfig();
@@ -134,7 +135,7 @@ export default class {
             }
         }
 
-        console.error('Chat complete Error: ' + error);
+        console.error('Chat complete Error: ' + error, error);
         return Promise.resolve(fail());
     }
 
@@ -146,7 +147,7 @@ export default class {
         while (
             messages.length > 3 &&
             messagesLength > (this.config.openAI.max_tokens ?? 4096) * 0.75
-        ) {
+            ) {
             messages.splice(1, 1);
             const newMessagesLength = this.getMessagesLength(messages);
             if (newMessagesLength !== messagesLength) {

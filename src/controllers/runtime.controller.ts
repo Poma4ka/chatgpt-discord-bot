@@ -148,20 +148,24 @@ export default class {
                     return br();
                 }
 
-                const user = await message.guild.members.cache.get(
-                    message.author.id,
-                );
+                if (message.author.id === this.config.discord.clientID) {
+                    result.unshift({
+                        role: 'assistant',
+                        content: cleanMessage,
+                    });
+                } else {
+                    const user = await message.guild.members.cache.get(
+                        message.author.id,
+                    );
 
-                const username = this.getUsername(user, message);
+                    const username = this.getUsername(user, message);
 
-                result.unshift({
-                    role:
-                        message.author.id === this.config.discord.clientID
-                            ? 'assistant'
-                            : 'user',
-                    content: cleanMessage,
-                    name: message.author.id === this.config.discord.clientID ? undefined : username,
-                });
+                    result.unshift({
+                        role: 'user',
+                        content: cleanMessage,
+                        name: username,
+                    });
+                }
 
                 maxMessagesLength -= cleanMessage.length;
             },
@@ -177,9 +181,9 @@ export default class {
 
     private getUsername(user: GuildMember, message: Message) {
         return (
-            (user.nickname ?? message.author.username)
+            (user?.nickname ?? message?.author?.username ?? 'Unknown Alien')
                 .replaceAll(/(?!\w| )./g, '')
-                .trim() ?? 'UnknownAlien'
+                .trim()
         );
     }
 }

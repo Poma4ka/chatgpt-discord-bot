@@ -93,7 +93,7 @@ export default class {
                             history,
                             message,
                             options,
-                            attempt++,
+                            ++attempt,
                         ),
                     () => ({
                         status: false,

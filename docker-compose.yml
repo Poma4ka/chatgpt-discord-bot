@@ -6,3 +6,7 @@ services:
     volumes:
       - /home/chat-gpt-discord-bot:/app/config
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 100M

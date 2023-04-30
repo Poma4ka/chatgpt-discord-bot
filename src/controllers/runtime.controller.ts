@@ -180,10 +180,10 @@ export default class {
     }
 
     private getUsername(user: GuildMember, message: Message) {
-        return (
-            (user?.nickname ?? message?.author?.username ?? 'Unknown Alien')
-                .replaceAll(/(?!\w| )./g, '')
-                .trim()
-        );
+        const nick = (user?.nickname ?? message?.author?.username ?? '')
+            .replaceAll(/(?!\w| )./g, '')
+            .trim();
+
+        return nick || 'Unknown Alien';
     }
 }

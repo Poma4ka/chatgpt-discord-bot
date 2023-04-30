@@ -14,3 +14,16 @@ services:
         limits:
           memory: 100M
           cpus: '0.1'
+  chat-gpt-terminal:
+    container_name: chat-gpt-discord-terminal
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /home/chat-gpt-discord-terminal:/app/config
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: '0.1'

@@ -97,7 +97,7 @@ export default class {
                     });
                 } else {
                     await message.reply({
-                        content: reply.message,
+                        content: reply.message ? reply.message : '```\n        \n```',
                     });
                 }
             } else {
@@ -160,7 +160,7 @@ export default class {
                             ? 'assistant'
                             : 'user',
                     content: cleanMessage,
-                    name: username,
+                    name: message.author.id === this.config.discord.clientID ? undefined : username,
                 });
 
                 maxMessagesLength -= cleanMessage.length;

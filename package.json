@@ -23,7 +23,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "js-yaml": "^4.1.0",
     "openai": "^3.2.1",
-    "redis": "^4.6.6",
     "tsup": "^6.5.0",
     "uuid": "^9.0.0"
   },

@@ -1,8 +1,11 @@
 version: '3.7'
 
 services:
-  chat-gpt-discord-bot:
-    build: .
+  chat-gpt:
+    container_name: chat-gpt-discord-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - /home/chat-gpt-discord-bot:/app/config
     restart: always
@@ -10,3 +13,4 @@ services:
       resources:
         limits:
           memory: 100M
+          cpus: '0.1'

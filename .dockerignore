@@ -1,2 +1,13 @@
-/node_modules
+node_modules
+.gitignore
+.git
+.github
+.idea
+.vscode
+
+.prettierrc
+.eslintrc
 npm-debug.log
+Dockerfile
+docker-compose.yml
+.dockerignore

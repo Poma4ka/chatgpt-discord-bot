@@ -184,6 +184,6 @@ export default class {
             .replaceAll(/(?!\w| )./g, '')
             .trim();
 
-        return nick || 'Unknown Alien';
+        return nick || 'UnknownAlien';
     }
 }

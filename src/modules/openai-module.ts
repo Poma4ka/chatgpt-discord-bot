@@ -5,7 +5,6 @@ import {
     CreateChatCompletionRequest,
 } from 'openai/api';
 import { AxiosError } from 'axios';
-import * as console from 'console';
 import { Config } from './config.module';
 
 interface ChatCompletionOptions {
@@ -17,8 +16,7 @@ export default class {
     private openAI: OpenAIApi;
     private config: Config;
 
-    constructor(private appModule: AppModule) {
-    }
+    constructor(private appModule: AppModule) {}
 
     public async init(key?: string) {
         this.config = this.appModule.configModule.getConfig();
@@ -145,20 +143,15 @@ export default class {
         let messagesLength = this.getMessagesLength(messages);
 
         while (
-            messages.length > 3 &&
+            messages.length > 2 &&
             messagesLength > (this.config.openAI.max_tokens ?? 4096) * 0.75
-            ) {
+        ) {
             messages.splice(1, 1);
-            const newMessagesLength = this.getMessagesLength(messages);
-            if (newMessagesLength !== messagesLength) {
-                messagesLength = newMessagesLength;
-            } else {
-                break;
-            }
+            messagesLength = this.getMessagesLength(messages);
         }
 
         const max_tokens: number =
-            this.config.openAI.max_tokens - messagesLength;
+            (this.config.openAI.max_tokens ?? 4096) - messagesLength;
 
         return { messages, max_tokens } as const;
     }

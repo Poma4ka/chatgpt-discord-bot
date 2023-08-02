@@ -1,32 +1,29 @@
 {
-  "name": "chatgpt-discordjs",
-  "version": "1.0.0",
+  "name": "chatgpt-discord-bot",
+  "version": "2.0.0",
   "description": "",
   "main": "./dist/index.js",
-  "type": "module",
   "scripts": {
-    "build": "tsup",
+    "build": "tsc -b",
     "start": "node ./dist/index.js",
     "lint": "eslint \"./src/**/*.ts\" --fix"
   },
-  "keywords": [],
-  "author": "",
+  "author": "roma4ka",
   "license": "ISC",
   "dependencies": {
-    "@types/js-yaml": "^4.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.59.1",
-    "@typescript-eslint/parser": "^5.59.1",
     "axios": "^1.4.0",
     "discord.js": "^14.7.1",
-    "eslint": "^8.39.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
     "js-yaml": "^4.1.0",
     "openai": "^3.2.1",
-    "tsup": "^6.5.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "typescript": "^4.9.5"
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@types/js-yaml": "^4.0.5",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^5.1.6"
   }
 }

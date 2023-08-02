@@ -9,10 +9,11 @@ interface ActiveMessage {
 }
 
 export default class {
-    private config: Config = this.appModule.configModule.getConfig();
+    private config: Config;
     private activeMessages: ActiveMessage[] = [];
 
     constructor(private appModule: AppModule) {
+        this.config = this.appModule.configModule.getConfig();
         this.createMessageListener();
     }
 
@@ -97,7 +98,9 @@ export default class {
                     });
                 } else {
                     await message.reply({
-                        content: reply.message ? reply.message : '```\n        \n```',
+                        content: reply.message
+                            ? reply.message
+                            : '```\n        \n```',
                     });
                 }
             } else {

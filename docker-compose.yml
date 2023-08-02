@@ -1,26 +1,11 @@
 version: '3.7'
 
 services:
-  chat-gpt:
-    container_name: chat-gpt-discord-bot
-    build:
-      context: .
-      dockerfile: Dockerfile
+  chatgpt-discord-bot:
+    container_name: chatgpt-discord-bot
+    image: ghcr.io/zloy-roma/chatgpt-discord-bot:2.0.0
     volumes:
-      - /home/chat-gpt-discord-bot:/app/config
-    restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 100M
-          cpus: '0.1'
-  chat-gpt-terminal:
-    container_name: chat-gpt-discord-terminal
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - /home/chat-gpt-discord-terminal:/app/config
+      - ./config:/app/config
     restart: always
     deploy:
       resources:

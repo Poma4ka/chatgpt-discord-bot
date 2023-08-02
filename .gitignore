@@ -1,4 +1,10 @@
 node_modules/*
-.env
+.env*.local
 dist
 .idea
+/config
+/logs
+/database
+/config.yml
+/bot.sqlite.db
+*.tsbuildinfo

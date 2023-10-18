@@ -7,6 +7,7 @@ export interface Config {
     discord: {
         token: string;
         clientID: string;
+        maxFileSize: number;
     };
     openAI: {
         keys: string[];
@@ -110,6 +111,7 @@ export default class {
             discord: {
                 token: 'discord-bot-token',
                 clientID: '123456789',
+                maxFileSize: 2048,
             },
             openAI: {
                 keys: ['key1', 'key2'],

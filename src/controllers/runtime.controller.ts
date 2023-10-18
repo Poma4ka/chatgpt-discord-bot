@@ -2,6 +2,7 @@ import { AppModule } from '../app-module';
 import { GuildMember, Message } from 'discord.js';
 import { ChatCompletionRequestMessage } from 'openai/api';
 import { Config } from '../modules/config.module';
+import axios from 'axios';
 
 interface ActiveMessage {
     id: string;
@@ -56,7 +57,7 @@ export default class {
             message.channel,
         );
 
-        const cleanMessage = this.cleanMessage(message);
+        const cleanMessage = await this.cleanMessage(message);
         const user = await message.guild.members.cache.get(message.author.id);
 
         const username = this.getUsername(user, message);
@@ -72,6 +73,8 @@ export default class {
             abort: abortController,
             id: message.id,
         });
+
+        console.log('Creating chat completion, history: ', history);
 
         const reply = await this.appModule.openAIModule.createChatCompletion(
             history,
@@ -145,7 +148,7 @@ export default class {
                     return br();
                 }
 
-                const cleanMessage = this.cleanMessage(message);
+                const cleanMessage = await this.cleanMessage(message);
 
                 if (maxMessagesLength - cleanMessage.length < 0) {
                     return br();
@@ -177,15 +180,29 @@ export default class {
         return result;
     }
 
-    private cleanMessage(message: Message): string {
+    private async cleanMessage(message: Message): Promise<string> {
         let clean = message.cleanContent;
 
         if (message.attachments) {
-            const attachments = [];
-            message.attachments.forEach((attachment) => {
-                attachments.push(attachment.toJSON());
-            });
-            clean = `${clean}\n${JSON.stringify({ attachments })}`;
+            const files = [];
+
+            for (const [_, attachment] of message.attachments) {
+                try {
+                    if (attachment.size < this.config.discord.maxFileSize) {
+                        files.push({
+                            name: attachment.name,
+                            content: await axios
+                                .get(attachment.url, {
+                                    responseType: 'text',
+                                })
+                                .then((r) => r.data),
+                        });
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            clean = `${clean}\n${JSON.stringify({ files })}`;
         }
 
         return clean.replace(/@/g, '');

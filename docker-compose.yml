@@ -3,7 +3,7 @@ version: '3.7'
 services:
   chatgpt-discord-bot:
     container_name: chatgpt-discord-bot
-    image: ghcr.io/zloy-roma/chatgpt-discord-bot:2.0.0
+    image: ghcr.io/zloy-roma/chatgpt-discord-bot:2.1.0
     volumes:
       - ./config:/app/config
     restart: always

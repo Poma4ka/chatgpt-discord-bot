@@ -85,14 +85,14 @@ export default class {
             },
         );
 
-        if (!reply.aborted) {
+        if (!abortController.signal.aborted) {
             if (reply.status) {
                 if (reply.message.length > 2000) {
                     await message.reply({
                         files: [
                             this.appModule.discordModule.createAttachment(
                                 reply.message,
-                                'message.txt',
+                                'message.md',
                             ),
                         ],
                     });
@@ -178,7 +178,16 @@ export default class {
     }
 
     private cleanMessage(message: Message): string {
-        const clean = message.cleanContent;
+        let clean = message.cleanContent;
+
+        if (message.attachments) {
+            const attachments = [];
+            message.attachments.forEach((attachment) => {
+                attachments.push(attachment.toJSON());
+            });
+            clean = `${clean}\n${JSON.stringify({ attachments })}`;
+        }
+
         return clean.replace(/@/g, '');
     }
 

@@ -65,17 +65,19 @@ export default class {
 
     public async getReferencesChain(
         message: Message,
-        callback: (message: Message, br: () => void) => void,
+        callback: (message: Message, br: () => void) => void | Promise<void>,
     ) {
         message = message.reference
             ? await message.fetchReference()
             : undefined;
 
         while (message) {
-            await callback(message, () => (message = null));
-            message = message?.reference
-                ? await message.fetchReference()
-                : undefined;
+            try {
+                await callback(message, () => (message = null));
+                message = message?.reference
+                    ? await message.fetchReference()
+                    : undefined;
+            } catch (ignore) {}
         }
     }
 

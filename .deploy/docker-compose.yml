@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  chatgpt-discord-bot:
+    container_name: chatgpt-discord-bot
+    image: ghcr.io/zloy-roma/chatgpt-discord-bot:3.0.0
+    volumes:
+      - ./config:/app/config
+    restart: always
+    environment:
+      BOT_NAME: FaithCraft-AI
+      LOG_LEVEL: log
+      DISCORD_BOT_TOKEN: token
+      OPENAI_API_KEY: api-key
+      OPENAI_API_KEYS_FILE:
+      CHATGPT_SYSTEM_MESSAGE: 'You are FaithCraft-AI invented by Poma4ka'
+      CHATGPT_MODEL: gpt-3.5-turbo
+      CHATGPT_MAX_TOKENS: 4096
+      CHATGPT_TEMPERATURE:
+      CHATGPT_TOP_P:
+      CHATGPT_FREQUENCY_PENALTY:
+      CHATGPT_PRESENCE_PENALTY:
+      CHATGPT_USE_STREAM: 1
+
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+          cpus: '0.5'

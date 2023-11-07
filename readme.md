@@ -1,9 +1,13 @@
-### Запуск
+## Запуск
+
+### Если есть Docker:
 ```shell
-docker compose up
+make prepare && make start
 ```
-или
+
+### Если докера нет:
 ```shell
-docker-compose up
+make prepare-raw && make start-raw
 ```
-После появится файл `config/config.json`, заполнить его, сохранить и бот заработает
+
+- Перед запуском нужно заполнить файл `./.deploy/.env` или `.env` если используете raw

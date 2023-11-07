@@ -1,29 +1,41 @@
 {
   "name": "chatgpt-discord-bot",
-  "version": "2.1.1",
-  "description": "",
-  "main": "./dist/index.js",
+  "version": "3.0.0",
+  "description": "Chatgpt discord bot",
+  "main": "./dist/main.js",
+  "repository": "https://github.com/zloy-roma/chatgpt-discord-bot",
+  "license": "MIT",
+  "author": "roma4ka",
   "scripts": {
-    "build": "tsc -b",
-    "start": "node ./dist/index.js",
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "start": "node ./dist/main.js",
     "lint": "eslint \"./src/**/*.ts\" --fix"
   },
-  "author": "roma4ka",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.4.0",
-    "discord.js": "^14.7.1",
-    "js-yaml": "^4.1.0",
-    "openai": "^3.2.1",
-    "uuid": "^9.0.0"
+    "@discord-nestjs/core": "^5.3.11",
+    "@nestjs/cli": "10.2.1",
+    "@nestjs/common": "10.2.7",
+    "@nestjs/core": "10.2.7",
+    "@nestjs/microservices": "10.2.8",
+    "axios": "^1.6.0",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.0",
+    "cross-env": "^7.0.3",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "openai": "^4.16.1",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "7.8.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.1",
-    "@typescript-eslint/parser": "^5.59.1",
-    "@types/js-yaml": "^4.0.5",
-    "eslint": "^8.39.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "typescript": "^5.1.6"
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "6.8.0",
+    "@typescript-eslint/parser": "6.8.0",
+    "eslint": "8.52.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "prettier": "3.0.3",
+    "typescript": "^5.2.2"
   }
 }

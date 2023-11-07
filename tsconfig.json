@@ -15,10 +15,17 @@
     "strictBindCallApply": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "composite": true,
-    "outDir": "dist",
-    "rootDir": "src"
+    "composite": false,
+    "noEmitHelpers": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "rootDir": "./src"
   },
-  "exclude": ["node_modules", "build"],
-  "include": ["src/**/*.ts"]
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
 }

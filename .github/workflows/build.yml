@@ -32,7 +32,6 @@ jobs:
       - name: Get version and name from package.json
         run: |
           echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-          echo "IMAGE_NAME=$(node -p "require('./package.json').name")" >> $GITHUB_ENV
 
       - name: Build and push image
         uses: docker/build-push-action@v3
@@ -40,4 +39,4 @@ jobs:
           context: .
           file: ./.deploy/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.VERSION }}
